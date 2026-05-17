@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Roshan Karnakar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Roshan Karnakar</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="Roshan_resu.pdf" target="_blank" class="btn-outline">Resume</a>
+</nav>
+
+<!-- 04 // CONTACT -->
+<section id="contact" class="container">
+  <span class="mono section-label">04 // CONTACT</span>
+  <h2 class="section-title serif">Let's Build Something!</h2>
+  <p class="section-desc">Ready to architect your next digital experience? Initialize a connection via the form below or through direct secure channels.</p>
+  
+  <div class="contact-grid">
+    <div class="form-card zg-element">
+      <form id="contact-form">
+        <div class="form-group">
+          <label class="form-label">NAME</label>
+          <input type="text" name="user_name" id="name" class="form-input" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">EMAIL</label>
+          <input type="email" name="user_email" id="email" class="form-input" placeholder="name@domain.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">MESSAGE</label>
+          <textarea name="message" id="message" class="form-input" placeholder="Compose a message..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message →</button>
+        <div id="form-status" style="margin-top: 1rem; font-size: 0.9rem; text-align: center; display: none;"></div>
+      </form>
+    </div>
+    
+    <div class="alt-routing zg-element-reverse">
+      <h4 class="serif">Alternative Routing</h4>
+      
+      <a href="mailto:roshankarnakar27@gmail.com" class="route-item">
+        <div class="route-icon">{'✉'}</div>
+        <div class="route-text">
+          <span class="route-label">EMAIL DIRECTLY</span>
+          <span class="route-val">roshankarnakar27@gmail.com</span>
+        </div>
+      </a>
+      
+      <a href="https://www.linkedin.com/in/roshan-karnakar-651619342/" target="_blank" class="route-item">
+        <div class="route-icon">{'in'}</div>
+        <div class="route-text">
+          <span class="route-label">NETWORK</span>
+          <span class="route-val">LinkedIn Profile</span>
+        </div>
+      </a>
+      
+      <a href="https://github.com/RoshanKarnakar" target="_blank" class="route-item" style="border-bottom:none;">
+        <div class="route-icon">{'< />'}</div>
+        <div class="route-text">
+          <span class="route-label">REPOSITORIES</span>
+          <span class="route-val">GitHub Profile</span>
+        </div>
+      </a>
+      
+      <div class="terminal-meta zg-element">
+        <span>LOC: 18.5204° N, 73.8567° E</span>
+        <span>PUNE, INDIA</span>
+        <span>STATUS: ONLINE</span>
+        <span>TEL: +91 8999693955</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo serif">Roshan Karnakar</div>
+  <div class="ft-copy">© 2026 ROSHAN KARNAKAR. ALL RIGHTS RESERVED.</div>
+  <div class="ft-links">
+    <a href="https://github.com/RoshanKarnakar" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/roshan-karnakar-651619342/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function() {
+      emailjs.init({
+        publicKey: "v6DPskP_nGdBfEkxm",
+      });
+  })();
+
+  window.onload = function() {
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          
+          const statusDiv = document.getElementById('form-status');
+          const submitBtn = this.querySelector('.btn-submit');
+          
+          submitBtn.textContent = 'Sending...';
+          statusDiv.style.display = 'none';
+          
+          emailjs.send("service_wvpkl7x", "template_kgbv3pq", {
+            to_name: "Roshan",
+            from_name: document.getElementById("name").value,
+            from_email: document.getElementById("email").value,
+            message: document.getElementById("message").value,
+          })
+              .then(function() {
+                  console.log('SUCCESS!');
+                  statusDiv.textContent = 'Message sent successfully!';
+                  statusDiv.style.color = '#4ade80';
+                  statusDiv.style.display = 'block';
+                  submitBtn.textContent = 'Send Message →';
+                  document.getElementById('contact-form').reset();
+              }, function(error) {
+                  console.log('FAILED...', error);
+                  statusDiv.textContent = 'Failed to send message. Please try again.';
+                  statusDiv.style.color = '#f87171';
+                  statusDiv.style.display = 'block';
+                  submitBtn.textContent = 'Send Message →';
+              });
+      });
+  }
+</script>
+</body>
+</html>
